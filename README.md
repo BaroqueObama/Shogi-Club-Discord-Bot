@@ -81,7 +81,7 @@ ELO:        1489.7    1565.7
 Comments: nan
 ```  
 ### Profile: `?profile [name]`   
-Shows detailed information on `name` (a player's first/nick name). Lists their full name, games won, lost, drawn, total, Elo, K/D, and win rate.  
+Shows detailed information on `name` (a player's first/nickname). Lists their full name, games won, lost, drawn, total, Elo, K/D, and win rate.  
 
 **Example:**  
 **User:** `?profile Daniel`  
@@ -96,7 +96,7 @@ K/D:       2.71
 Win%:       0.6
 ```  
 ### Members: `?members [full_name]`   
-Lists the names of all members in the club. Displays only first names by default but could pass on additional argument `true` to display full names.
+Lists the names of all members in the club. Displays only first names by default but could pass on additional argument `full_name=true` to display full names.
 
 **Example:**  
 **User:** `?members`  
@@ -116,7 +116,7 @@ Name:
 ## Commands/Features (for server owners):
 **All the following commands check whether the user is the server owner.**
 ### Begin/End Update: `?update ["begin", "save"]`   
-Begins or ends update process. Cannot make changes unless  update process is begun and changes are not saved unless the update process is saved.  
+Begins or ends update process. Cannot make changes unless the update process is begun and changes are not saved unless the update process is saved.  
 
 **Example:**  
 **User:** `?update begin`  
@@ -154,7 +154,7 @@ Change Log:
 ### Add Game: `?add [name1] [name2] [game mode] ["W", "L", "D"] [comments] [date]`   
 Adds a game played between `name1` and `name2`.  
 If these players do not exist yet in the member list, they must be added.  
-`game mode` typically indicates `R` for ranked for `U` for unranked.  
+`game mode` typically indicates `R` for ranked and `U` for unranked.  
 `["W", "L", "D"]` indicates whether `name1` won, lost, or drawn during the match.  
 `comments` are just comments regarding the game. Keep them blank with a `""` if nothing to say.  
 The date is `yyyy-mm-dd` but defaults to current day so could be left blank.  
@@ -168,7 +168,7 @@ Daniel draw: ELO Change: 1564.8933407290097, New ELO: 0
 Noah draw: ELO Change: 1555.7545053129618, New ELO: 0
 ```  
 ### Push to History: `?push [date]`   
-Pushes current scores to player history. Date is current date by default. Could set manually with `yyyy-mm-dd`.
+Pushes current scores to player history. Date is the current date by default. Could be set manually with `yyyy-mm-dd`.
 
 **Example:**  
 **User:** `?push 2024-02-01`  
@@ -177,7 +177,7 @@ Pushes current scores to player history. Date is current date by default. Could 
 Pushed data to player history.
 ```  
 ### Add Player: `?add_player [full_name] [start_elo]`   
-Adds a new player to the member list and creates a nick name for them. `start_elo` is optional but is set to 1100 by default. 
+Adds a new player to the member list and creates a nickname for them. `start_elo` is optional but is set to 1100 by default. 
 
 **Example:**  
 **User:** `?add_player "Kartikey Sharma" 1000`  
@@ -185,7 +185,7 @@ Adds a new player to the member list and creates a nick name for them. `start_el
 ```
 Player Kartikey added with 1000 ELO.
 ```  
-### Re-calculate Stats: `?rerun_calculations`   
+### Recalculate Stats: `?rerun_calculations`   
 Re-plays all the games in history and recalculates all the player's scores. Useful when you rework how much Elo is rewarded. Scores are pushed as new entries in player history for every date. You should run `?clear_players` first to begin with a clean slate. 
 
 **Example:**  
@@ -195,7 +195,7 @@ Re-plays all the games in history and recalculates all the player's scores. Usef
 Rerun Calculations on Player Data
 ```  
 ### Clear Player Data: `?clear_players`   
-Clears player data to some initial reset state set by csv files in the `data` folder. You run this to start with a clean slate to run Re-calculate stats on.  
+Clears player data to some initial reset state set by csv files in the `data` folder. You run this to start with a clean slate to run Recalculate stats on.  
 If you run this and save the update without `?rerun_calculations`, your player data and player_history data will be lost. Your games data will not be lost.
 
 **Example:**  
