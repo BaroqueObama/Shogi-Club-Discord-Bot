@@ -83,6 +83,8 @@ class ShogiClub:
         
     # Adds current player data to player_history
     def append_player_data(self, date):
+        for col in self.player_history.columns[2:]:
+            self.player_history[col] = self.player_history[col].apply(lambda x: eval(x, {"inf": np.inf, "nan": np.nan}))
         for index, player in self.players.iterrows():
             # Gets index of player in player history
             player_data_index = self.player_history[self.player_history["nick_name"]==player["nick_name"]].index
@@ -247,20 +249,17 @@ class ShogiClub:
         pretty_names = {"elo":"ELO", "games":"# Played", "kd":"K/D", "rate":"% Won"}
         sorted_rankings = self.players.sort_values(by=column_names[rank_by], ascending=False)["nick_name"][0:n]
         player_data = self.player_history.iloc[list(sorted_rankings.index)]
-        
         fig, ax = plt.subplots()
         
         smallest_date = datetime(2050, 1, 1)
         largest_date = datetime(2000, 1, 1)
-        
         for index, player in player_data.iterrows():
-            x, y = self.get_continuous_dates(ast.literal_eval(player["date"]), ast.literal_eval(player[column_names[rank_by]]))
+            x, y = self.get_continuous_dates(ast.literal_eval(str(player["date"])), ast.literal_eval(str(player[column_names[rank_by]])))
             if x[0] < smallest_date:
                 smallest_date = x[0]
             if x[-1] > largest_date:
                 largest_date = x[-1]
             ax.plot(x, y, label=player["nick_name"])
-        
         dates = pd.date_range(start=smallest_date, end=largest_date, periods=5)
         date_list = list(dates.to_pydatetime())
         ax.set_xticks(date_list)
